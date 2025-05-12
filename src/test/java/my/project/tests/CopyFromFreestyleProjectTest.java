@@ -5,6 +5,7 @@ import my.project.page.HomePage;
 import my.project.page.error.ErrorPage;
 import my.project.page.freestyle.FreestyleConfigurationPage;
 import my.project.page.freestyle.FreestyleProjectPage;
+import my.project.page.newitem.NewItemPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -37,7 +38,7 @@ public class CopyFromFreestyleProjectTest extends BaseTest {
         FreestyleConfigurationPage freestyleConfigurationPage = new HomePage(getDriver())
                 .clickNewItemOnLeftSidePanel()
                 .sendItemName(projectNameForCopy)
-                .selectFreestyle()
+                .selectItemTypeByName(NewItemPage.itemType.get(0))
                 .sendTextCopyForm(PROJECT_NAME)
                 .clickOkButton();
 
@@ -54,7 +55,7 @@ public class CopyFromFreestyleProjectTest extends BaseTest {
         ErrorPage errorPage = new HomePage(getDriver())
                 .clickNewItemOnLeftSidePanel()
                 .sendItemName(projectNameForCopy)
-                .selectFreestyle()
+                .selectItemTypeByName(NewItemPage.itemType.get(0))
                 .sendTextCopyForm(nonexistentName)
                 .clickOkButtonWithError();
 
