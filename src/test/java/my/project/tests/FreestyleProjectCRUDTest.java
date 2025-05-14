@@ -2,6 +2,7 @@ package my.project.tests;
 
 import my.project.common.BaseTest;
 import my.project.page.HomePage;
+import my.project.page.freestyle.FreestyleConfigurationPage;
 import my.project.page.freestyle.FreestyleProjectPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -24,17 +25,23 @@ public class FreestyleProjectCRUDTest extends BaseTest {
     }
 
     @Test (dependsOnMethods = "CreateFreestyleProject")
-    public void updateFreestyleProject() {
+    public void updateFreestyleProjectConfig() {
         FreestyleProjectPage freestyleProjectPage = new HomePage(getDriver())
-                .clickOnJobInListOfItems(PROJECT_NAME, new FreestyleProjectPage(getDriver()))
-                .clickDescriptionButton()
-                .sendDescription(DESCRIPTION)
+                .clickOnConfigure(PROJECT_NAME, new FreestyleConfigurationPage(getDriver()))
+                .addDescription(DESCRIPTION)
                 .clickSaveButton();
 
-        Assert.assertEquals(freestyleProjectPage.getProjectName(), PROJECT_NAME);
         Assert.assertEquals(freestyleProjectPage.getDescription(), DESCRIPTION);
-
     }
 
+    @Test (dependsOnMethods = "updateFreestyleProjectConfig")
+    public void deleteFreestyleProject() {
+        boolean projectDelete = new HomePage(getDriver())
+                .clickOnDelete(PROJECT_NAME, new HomePage(getDriver()))
+                .confirmDeleteProject()
+                .getProjectNameList()
+                .contains(PROJECT_NAME);
 
+        Assert.assertFalse(projectDelete);
+    }
 }

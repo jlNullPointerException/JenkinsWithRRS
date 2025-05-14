@@ -47,6 +47,15 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[@href='/manage/about']")
     private WebElement jenkinsAboutOptionInJenkinsVersionDropDownMenu;
 
+    @FindBy(xpath = "//*[@id='tippy-6']/div/div/div/a[3]")
+    private WebElement configure;
+
+    @FindBy(xpath = "//*[@id='tippy-6']/div/div/div/button[2]")
+    private WebElement delete;
+
+    @FindBy(xpath = "//*[@id='jenkins']/dialog[2]/div[3]/button[1]")
+    private WebElement buttonYesDeleteProject;
+
     private final static String JOB_PATTERN = "//tr[@id='job_%s']";
 
     public HomePage(WebDriver driver) {
@@ -111,6 +120,35 @@ public class HomePage extends BasePage {
         return resultPage;
     }
 
+//    public <TYPE> TYPE clickOnSelectButtonInMenu(String nameItem, TYPE resultPage, String buttonName) {
+//        getWait10().until(ExpectedConditions.visibilityOfElementLocated(
+//                By.xpath("//span[text()='%s']".formatted(nameItem)))).click();
+//        button.click();
+//
+//        return resultPage;
+//    }
+
+    public <T> T clickOnConfigure(String nameItem, T resultPage) {
+        getWait10().until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//span[text()='%s']".formatted(nameItem)))).click();
+        configure.click();
+
+        return resultPage;
+    }
+
+    public <T> T clickOnDelete(String nameItem, T resultPage) {
+        getWait10().until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//span[text()='%s']".formatted(nameItem)))).click();
+        delete.click();
+
+        return resultPage;
+    }
+
+    public HomePage confirmDeleteProject() {
+        buttonYesDeleteProject.click();
+        return this;
+    }
+
     public List<String> getProjectNameList() {
         if (isJobListEmpty()) {
             return List.of();
@@ -119,12 +157,6 @@ public class HomePage extends BasePage {
         return getDriver().findElements(By.cssSelector(".jenkins-table__link > span:nth-child(1)")).stream()
                 .map(WebElement::getText).toList();
     }
-
-//    public FreestyleProjectPage openCreatedProject(String projectName) {
-//        getDriver().findElement(By.xpath(//*[@id="job_666"]/td[3]/a/span));
-//        return new FreestyleProjectPage(getDriver());
-//    }
-
 
     public String getNameOfView() {
         return getWait10().until(ExpectedConditions.visibilityOfElementLocated(

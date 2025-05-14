@@ -1,5 +1,6 @@
 package my.project.page.freestyle;
 
+import my.project.page.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,7 +29,9 @@ public class FreestyleProjectPage extends BasePage {
     private List<WebElement> leftMenuElementsList;
 
     @FindBy(name = "Submit")
-    private WebElement buttonSave;
+    private WebElement saveButton;
+
+
 
     public FreestyleProjectPage(WebDriver driver) {
         super(driver);
@@ -61,7 +64,7 @@ public class FreestyleProjectPage extends BasePage {
     }
 
     public FreestyleProjectPage clickSaveButton() {
-        buttonSave.click();
+        saveButton.click();
 
         return this;
     }
