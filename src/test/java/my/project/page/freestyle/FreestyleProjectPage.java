@@ -27,6 +27,9 @@ public class FreestyleProjectPage extends BasePage {
     @FindBy(xpath = "//div[@id='tasks']/div/span/a/span[2]")
     private List<WebElement> leftMenuElementsList;
 
+    @FindBy(name = "Submit")
+    private WebElement buttonSave;
+
     public FreestyleProjectPage(WebDriver driver) {
         super(driver);
     }
@@ -39,14 +42,13 @@ public class FreestyleProjectPage extends BasePage {
         return descriptionText.getText();
     }
 
-    public FreestyleProjectPage clickEditDescriptionButton() {
+    public FreestyleProjectPage clickDescriptionButton() {
         descriptionButton.click();
 
         return this;
     }
 
     public FreestyleProjectPage sendDescription(String text) {
-        descriptionTextarea.clear();
         descriptionTextarea.sendKeys(text);
 
         return this;
@@ -54,6 +56,12 @@ public class FreestyleProjectPage extends BasePage {
 
     public FreestyleProjectPage deleteDescription() {
         descriptionTextarea.clear();
+
+        return this;
+    }
+
+    public FreestyleProjectPage clickSaveButton() {
+        buttonSave.click();
 
         return this;
     }

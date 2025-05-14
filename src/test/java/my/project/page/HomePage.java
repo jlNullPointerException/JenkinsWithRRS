@@ -91,12 +91,6 @@ public class HomePage extends BasePage {
         return descriptionText.isDisplayed();
     }
 
-    public String getNameProject() {
-
-        return getWait5().until(ExpectedConditions.visibilityOf(getDriver().findElement(By
-                        .xpath("//*[@id='job_My name']/td[3]/a"))))
-                .getText();
-    }
 
     public NewItemPage clickCreateJob() {
         getDriver().findElement(By.xpath("//span[text()='Create a job']")).click();
@@ -117,7 +111,6 @@ public class HomePage extends BasePage {
         return resultPage;
     }
 
-
     public List<String> getProjectNameList() {
         if (isJobListEmpty()) {
             return List.of();
@@ -126,6 +119,11 @@ public class HomePage extends BasePage {
         return getDriver().findElements(By.cssSelector(".jenkins-table__link > span:nth-child(1)")).stream()
                 .map(WebElement::getText).toList();
     }
+
+//    public FreestyleProjectPage openCreatedProject(String projectName) {
+//        getDriver().findElement(By.xpath(//*[@id="job_666"]/td[3]/a/span));
+//        return new FreestyleProjectPage(getDriver());
+//    }
 
 
     public String getNameOfView() {
