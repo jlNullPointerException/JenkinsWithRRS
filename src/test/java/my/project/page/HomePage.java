@@ -113,32 +113,20 @@ public class HomePage extends BasePage {
         return new NewItemPage(getDriver());
     }
 
-    public <T> T clickOnJobInListOfItems(String nameItem, T resultPage) {
+    public void clickOnSelectButtonInMenu(String nameItem) {
         getWait10().until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//span[text()='%s']".formatted(nameItem)))).click();
-
-        return resultPage;
     }
 
-//    public <TYPE> TYPE clickOnSelectButtonInMenu(String nameItem, TYPE resultPage, String buttonName) {
-//        getWait10().until(ExpectedConditions.visibilityOfElementLocated(
-//                By.xpath("//span[text()='%s']".formatted(nameItem)))).click();
-//        button.click();
-//
-//        return resultPage;
-//    }
-
     public <T> T clickOnConfigure(String nameItem, T resultPage) {
-        getWait10().until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//span[text()='%s']".formatted(nameItem)))).click();
+        clickOnSelectButtonInMenu(nameItem);
         configure.click();
 
         return resultPage;
     }
 
     public <T> T clickOnDelete(String nameItem, T resultPage) {
-        getWait10().until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//span[text()='%s']".formatted(nameItem)))).click();
+        clickOnSelectButtonInMenu(nameItem);
         delete.click();
 
         return resultPage;
@@ -165,16 +153,6 @@ public class HomePage extends BasePage {
 
     public boolean isJobDisplayed(String jobName) {
         return getWait10().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='job_" + jobName + "']/td[3]/a/span"))).isDisplayed();
-    }
-
-    public NewItemPage clickOnNewItemLinkWithChevron(String projectName) {
-        WebElement jobTableLink = getWait5().until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.cssSelector(String.format("a[href='job/%s/'].jenkins-table__link", projectName)))));
-
-        new Actions(getDriver()).moveToElement(jobTableLink).perform();
-        TestUtils.moveAndClickWithJS(getDriver(), getDriver().findElement(By.cssSelector(String.format("button[data-href$='job/%s/']", projectName))));
-        TestUtils.scrollAndClickWithJS(getDriver(), getDriver().findElement(By.cssSelector(".jenkins-dropdown a[href$='/newJob'")));
-
-        return new NewItemPage(getDriver());
     }
 
     public String getProjectName() {

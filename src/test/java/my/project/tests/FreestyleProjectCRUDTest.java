@@ -13,7 +13,7 @@ public class FreestyleProjectCRUDTest extends BaseTest {
     private static final String DESCRIPTION = "test";
 
     @Test
-    public void CreateFreestyleProject() {
+    public void createFreestyleProject() {
         String actualProjectName = new HomePage(getDriver())
                 .clickNewItemOnLeftSidePanel()
                 .sendItemName(PROJECT_NAME)
@@ -24,7 +24,7 @@ public class FreestyleProjectCRUDTest extends BaseTest {
         Assert.assertEquals(actualProjectName, PROJECT_NAME);
     }
 
-    @Test (dependsOnMethods = "CreateFreestyleProject")
+    @Test (dependsOnMethods = "createFreestyleProject")
     public void updateFreestyleProjectConfig() {
         FreestyleProjectPage freestyleProjectPage = new HomePage(getDriver())
                 .clickOnConfigure(PROJECT_NAME, new FreestyleConfigurationPage(getDriver()))
