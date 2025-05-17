@@ -31,6 +31,12 @@ public class NewItemPage extends BasePage {
     @FindBy(className = "hudson_model_FreeStyleProject")
     public WebElement freestyleProject;
 
+    @FindBy(id = "itemname-required")
+    private WebElement emptyError;
+
+    @FindBy(id = "itemname-invalid")
+    private WebElement errorText;
+
     public NewItemPage(WebDriver driver) {
         super(driver);
     }
@@ -78,6 +84,31 @@ public class NewItemPage extends BasePage {
 
         return new NewItemPage(getDriver());
     }
+
+    public String getEmptyErrorText() {
+        return getWait5()
+                .until(ExpectedConditions.visibilityOf(emptyError))
+                .getText();
+    }
+
+    public String getEmptyErrorColor() {
+       return getWait5()
+               .until(ExpectedConditions.visibilityOf(emptyError))
+               .getCssValue("color");
+    }
+
+    public String getErrorText() {
+        return getWait5()
+                .until(ExpectedConditions.visibilityOf(errorText))
+                .getText();
+    }
+
+    public String getErrorColor() {
+        return getWait5()
+                .until(ExpectedConditions.visibilityOf(errorText))
+                .getCssValue("color");
+    }
+
 
 
 }
