@@ -2,6 +2,7 @@ package my.project.tests;
 
 import my.project.common.BaseTest;
 import my.project.page.HomePage;
+import my.project.page.freestyle.FreestyleConfigurationPage;
 import my.project.page.newitem.NewItemPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -100,7 +101,7 @@ public class IncorrectNameForNewItemTest extends BaseTest {
         String actualProjectName = new HomePage(getDriver())
                 .clickNewItemOnLeftSidePanel()
                 .sendItemName(name)
-                .selectFreestyleAndClickOk()
+                .selectItemAndClickOk(0, new FreestyleConfigurationPage(getDriver()))
                 .clickSaveButton()
                 .getProjectName();
 

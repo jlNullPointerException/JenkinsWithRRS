@@ -21,7 +21,7 @@ public class AllCreateProjectPage extends BasePage {
     @FindBy(css = "#description > div")
     private WebElement descriptionText;
 
-    @FindBy(className = "page-headline")
+    @FindBy(xpath = "//*[contains(@class, 'page-headline')]")
     private WebElement projectName;
 
     @FindBy(xpath = "//div[@id='tasks']/div/span/a/span[2]")
@@ -29,8 +29,6 @@ public class AllCreateProjectPage extends BasePage {
 
     @FindBy(name = "Submit")
     private WebElement saveButton;
-
-
 
     public AllCreateProjectPage(WebDriver driver) {
         super(driver);

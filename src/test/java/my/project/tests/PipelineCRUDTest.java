@@ -2,7 +2,6 @@ package my.project.tests;
 
 import my.project.common.BaseTest;
 import my.project.page.HomePage;
-import my.project.page.freestyle.FreestyleConfigurationPage;
 import my.project.page.pipeline.PipelineConfigurationPage;
 import my.project.page.saveItem.AllCreateProjectPage;
 import org.testng.Assert;
@@ -18,7 +17,7 @@ public class PipelineCRUDTest extends BaseTest {
         String actualProjectName = new HomePage(getDriver())
                 .clickNewItemOnLeftSidePanel()
                 .sendItemName(PROJECT_NAME)
-                .selectPipelineAndClickOk()
+                .selectItemAndClickOk(1, new PipelineConfigurationPage(getDriver()))
                 .clickSaveButton()
                 .getProjectName();
 

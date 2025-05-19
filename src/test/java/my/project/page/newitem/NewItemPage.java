@@ -71,18 +71,11 @@ public class NewItemPage extends BasePage {
         return new ErrorPage(getDriver());
     }
 
-    public FreestyleConfigurationPage selectFreestyleAndClickOk() {
-        selectItemTypeByName(itemType.get(0));
+    public <T> T selectItemAndClickOk(int itemIndex, T resultPage) {
+        selectItemTypeByName(itemType.get(itemIndex));
         okButton.click();
 
-        return new FreestyleConfigurationPage(getDriver());
-    }
-
-    public PipelineConfigurationPage selectPipelineAndClickOk() {
-        selectItemTypeByName(itemType.get(1));
-        okButton.click();
-
-        return new PipelineConfigurationPage(getDriver());
+        return resultPage;
     }
 
     public NewItemPage sendTextCopyForm(String text) {

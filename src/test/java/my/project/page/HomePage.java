@@ -215,8 +215,6 @@ public class HomePage extends BasePage {
         return new HomePage(getDriver());
     }
 
-
-
     public List<String> getColumnNames() {
 
         return getDriver().findElements(By.xpath("//th/a")).stream()

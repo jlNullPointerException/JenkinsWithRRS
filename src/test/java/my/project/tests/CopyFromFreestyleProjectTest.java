@@ -21,7 +21,7 @@ public class CopyFromFreestyleProjectTest extends BaseTest {
         AllCreateProjectPage allCreateProjectPage = new HomePage(getDriver())
                 .clickNewItemOnLeftSidePanel()
                 .sendItemName(PROJECT_NAME)
-                .selectFreestyleAndClickOk()
+                .selectItemAndClickOk(0, new FreestyleConfigurationPage(getDriver()))
                 .addDescription(DESCRIPTION)
                 .clickThrottleBuilds()
                 .selectTimePeriod(TIME_PERIOD)
