@@ -3,7 +3,7 @@ package my.project.tests;
 import my.project.common.BaseTest;
 import my.project.page.HomePage;
 import my.project.page.freestyle.FreestyleConfigurationPage;
-import my.project.page.saveItem.AllCreateProjectPage;
+import my.project.page.freestyle.FreestylePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,7 +18,7 @@ public class FreestyleProjectCRUDTest extends BaseTest {
                 .clickNewItemOnLeftSidePanel()
                 .sendItemName(PROJECT_NAME)
                 .selectItemAndClickOk(0, new FreestyleConfigurationPage(getDriver()))
-                .clickSaveButton()
+                .clickSaveButton(new FreestylePage(getDriver()))
                 .getProjectName();
 
         Assert.assertEquals(actualProjectName, PROJECT_NAME);
@@ -26,12 +26,12 @@ public class FreestyleProjectCRUDTest extends BaseTest {
 
     @Test (dependsOnMethods = "createFreestyleProject")
     public void updateFreestyleProjectConfig() {
-        AllCreateProjectPage allCreateProjectPage = new HomePage(getDriver())
+        FreestylePage freestylePage = new HomePage(getDriver())
                 .clickOnAction(PROJECT_NAME, HomePage.jobMenu.get(2), new FreestyleConfigurationPage(getDriver()))
                 .addDescription(DESCRIPTION)
-                .clickSaveButton();
+                .clickSaveButton(new FreestylePage(getDriver()));
 
-        Assert.assertEquals(allCreateProjectPage.getDescription(), DESCRIPTION);
+        Assert.assertEquals(freestylePage.getDescription(), DESCRIPTION);
     }
 
     @Test (dependsOnMethods = "updateFreestyleProjectConfig")

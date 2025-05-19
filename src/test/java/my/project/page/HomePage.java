@@ -6,10 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import my.project.common.BasePage;
+import my.project.page.base.BasePage;
 import my.project.common.TestUtils;
-
-import my.project.page.saveItem.AllCreateProjectPage;
 
 import my.project.page.newitem.NewItemPage;
 
@@ -298,11 +296,11 @@ public class HomePage extends BasePage {
         return buildScheduled.getText().equals("Build scheduled");
     }
 
-    public AllCreateProjectPage clickProjectName(String projectName) {
-        getDriver().findElement(By.linkText(projectName)).click();
-
-        return new AllCreateProjectPage(getDriver());
-    }
+//    public AllCreateProjectPage clickProjectName(String projectName) {
+//        getDriver().findElement(By.linkText(projectName)).click();
+//
+//        return new AllCreateProjectPage(getDriver());
+//    }
 
     public String getJobLastSuccess(String jobName) {
 

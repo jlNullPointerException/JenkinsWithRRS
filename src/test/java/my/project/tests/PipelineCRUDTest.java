@@ -3,7 +3,7 @@ package my.project.tests;
 import my.project.common.BaseTest;
 import my.project.page.HomePage;
 import my.project.page.pipeline.PipelineConfigurationPage;
-import my.project.page.saveItem.AllCreateProjectPage;
+import my.project.page.pipeline.PipelinePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,7 +18,7 @@ public class PipelineCRUDTest extends BaseTest {
                 .clickNewItemOnLeftSidePanel()
                 .sendItemName(PROJECT_NAME)
                 .selectItemAndClickOk(1, new PipelineConfigurationPage(getDriver()))
-                .clickSaveButton()
+                .clickSaveButton(new PipelinePage(getDriver()))
                 .getProjectName();
 
         Assert.assertEquals(actualProjectName, PROJECT_NAME);
@@ -26,12 +26,12 @@ public class PipelineCRUDTest extends BaseTest {
 
     @Test (dependsOnMethods = "createPipeline")
     public void updatePipelineConfig() {
-        AllCreateProjectPage allCreateProjectPage = new HomePage(getDriver())
+        PipelinePage pipelinePage = new HomePage(getDriver())
                 .clickOnAction(PROJECT_NAME, HomePage.jobMenu.get(2), new PipelineConfigurationPage(getDriver()))
                 .addDescription(DESCRIPTION)
-                .clickSaveButton();
+                .clickSaveButton(new PipelinePage(getDriver()));
 
-        Assert.assertEquals(allCreateProjectPage.getDescription(), DESCRIPTION);
+        Assert.assertEquals(pipelinePage.getDescription(), DESCRIPTION);
     }
 
     @Test (dependsOnMethods = "updatePipelineConfig")

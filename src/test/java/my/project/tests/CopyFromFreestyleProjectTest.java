@@ -4,7 +4,7 @@ import my.project.common.BaseTest;
 import my.project.page.HomePage;
 import my.project.page.error.ErrorPage;
 import my.project.page.freestyle.FreestyleConfigurationPage;
-import my.project.page.saveItem.AllCreateProjectPage;
+import my.project.page.freestyle.FreestylePage;
 import my.project.page.newitem.NewItemPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,17 +18,17 @@ public class CopyFromFreestyleProjectTest extends BaseTest {
 
     @Test
     public void freestyleProjectWithConfig() {
-        AllCreateProjectPage allCreateProjectPage = new HomePage(getDriver())
+        FreestylePage freestylePage = new HomePage(getDriver())
                 .clickNewItemOnLeftSidePanel()
                 .sendItemName(PROJECT_NAME)
                 .selectItemAndClickOk(0, new FreestyleConfigurationPage(getDriver()))
                 .addDescription(DESCRIPTION)
                 .clickThrottleBuilds()
                 .selectTimePeriod(TIME_PERIOD)
-                .clickSaveButton();
+                .clickSaveButton(new FreestylePage(getDriver()));
 
-        Assert.assertEquals(allCreateProjectPage.getProjectName(), PROJECT_NAME);
-        Assert.assertEquals(allCreateProjectPage.getDescription(), DESCRIPTION);
+        Assert.assertEquals(freestylePage.getProjectName(), PROJECT_NAME);
+        Assert.assertEquals(freestylePage.getDescription(), DESCRIPTION);
     }
 
     @Test (dependsOnMethods = "freestyleProjectWithConfig")

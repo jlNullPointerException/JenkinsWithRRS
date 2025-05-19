@@ -1,6 +1,6 @@
 package my.project.page.search;
 
-import my.project.common.BasePage;
+import my.project.page.base.BasePage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

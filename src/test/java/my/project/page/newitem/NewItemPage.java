@@ -1,10 +1,9 @@
 package my.project.page.newitem;
 
-import my.project.common.BasePage;
+import my.project.page.base.BasePage;
 import my.project.page.error.ErrorPage;
 
 import my.project.page.freestyle.FreestyleConfigurationPage;
-import my.project.page.pipeline.PipelineConfigurationPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -1,8 +1,7 @@
 package my.project.page.error;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import my.project.common.BasePage;
+import my.project.page.base.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

@@ -1,16 +1,12 @@
 package my.project.page.freestyle;
 
-import my.project.page.saveItem.AllCreateProjectPage;
+import my.project.page.base.BaseConfigurationPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import my.project.common.BasePage;
 
-public class FreestyleConfigurationPage extends BasePage {
-
-    @FindBy(name = "Submit")
-    private WebElement buttonSave;
+public class FreestyleConfigurationPage extends BaseConfigurationPage {
 
     @FindBy(xpath = "//textarea[@name='description']")
     private WebElement fieldDescription;
@@ -35,12 +31,6 @@ public class FreestyleConfigurationPage extends BasePage {
         fieldDescription.sendKeys(text);
 
         return this;
-    }
-
-    public AllCreateProjectPage clickSaveButton() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
-
-        return new AllCreateProjectPage(getDriver());
     }
 
     public FreestyleConfigurationPage clickThrottleBuilds() {

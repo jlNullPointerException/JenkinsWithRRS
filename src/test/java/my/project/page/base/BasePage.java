@@ -1,5 +1,6 @@
-package my.project.common;
+package my.project.page.base;
 
+import my.project.common.BaseModel;
 import org.openqa.selenium.WebDriver;
 import my.project.component.HeaderComponent;
 

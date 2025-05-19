@@ -3,8 +3,7 @@ package my.project.tests;
 import my.project.common.BaseTest;
 import my.project.page.HomePage;
 import my.project.page.multiconfiguration.MultiConfigurationConfigurationPage;
-import my.project.page.pipeline.PipelineConfigurationPage;
-import my.project.page.saveItem.AllCreateProjectPage;
+import my.project.page.multiconfiguration.MultiConfigurationPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -19,26 +18,26 @@ public class MultiConfigurationCRUDTest extends BaseTest {
                 .clickNewItemOnLeftSidePanel()
                 .sendItemName(PROJECT_NAME)
                 .selectItemAndClickOk(2, new MultiConfigurationConfigurationPage(getDriver()))
-                .clickSaveButton()
+                .clickSaveButton(new MultiConfigurationPage(getDriver()))
                 .getProjectName();
 
-        Assert.assertEquals(actualProjectName, PROJECT_NAME);
+        Assert.assertEquals(actualProjectName, "Project " + PROJECT_NAME);
     }
 
     @Test (dependsOnMethods = "createMultiConfiguration")
     public void updateMultiConfigurationConfig() {
-        AllCreateProjectPage allCreateProjectPage = new HomePage(getDriver())
-                .clickOnAction(PROJECT_NAME, HomePage.jobMenu.get(2), new PipelineConfigurationPage(getDriver()))
+        MultiConfigurationPage multiConfigurationPage = new HomePage(getDriver())
+                .clickOnAction(PROJECT_NAME, HomePage.jobMenu.get(2), new MultiConfigurationConfigurationPage(getDriver()))
                 .addDescription(DESCRIPTION)
-                .clickSaveButton();
+                .clickSaveButton(new MultiConfigurationPage(getDriver()));
 
-        Assert.assertEquals(allCreateProjectPage.getDescription(), DESCRIPTION);
+        Assert.assertEquals(multiConfigurationPage.getDescription(), DESCRIPTION);
     }
 
     @Test (dependsOnMethods = "updateMultiConfigurationConfig")
     public void deleteMultiConfiguration() {
         boolean projectDelete = new HomePage(getDriver())
-                .clickOnAction(PROJECT_NAME, HomePage.jobMenu.get(4), new HomePage(getDriver()))
+                .clickOnAction(PROJECT_NAME, HomePage.jobMenu.get(8), new HomePage(getDriver()))
                 .confirmDeleteProject()
                 .getProjectNameList()
                 .contains(PROJECT_NAME);

@@ -1,16 +1,11 @@
-package my.project.page.saveItem;
+package my.project.page.base;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import my.project.common.BasePage;
 
-
-import java.util.List;
-
-public class AllCreateProjectPage extends BasePage {
+public abstract class BaseSaveProjectPage extends BasePage {
 
     @FindBy(id = "description-link")
     private WebElement descriptionButton;
@@ -24,13 +19,10 @@ public class AllCreateProjectPage extends BasePage {
     @FindBy(xpath = "//*[contains(@class, 'page-headline')]")
     private WebElement projectName;
 
-    @FindBy(xpath = "//div[@id='tasks']/div/span/a/span[2]")
-    private List<WebElement> leftMenuElementsList;
-
     @FindBy(name = "Submit")
     private WebElement saveButton;
 
-    public AllCreateProjectPage(WebDriver driver) {
+    public BaseSaveProjectPage(WebDriver driver) {
         super(driver);
     }
 
@@ -42,34 +34,27 @@ public class AllCreateProjectPage extends BasePage {
         return descriptionText.getText();
     }
 
-    public AllCreateProjectPage clickDescriptionButton() {
+    public BaseSaveProjectPage clickDescriptionButton() {
         descriptionButton.click();
 
         return this;
     }
 
-    public AllCreateProjectPage sendDescription(String text) {
+    public BaseSaveProjectPage sendDescription(String text) {
         descriptionTextarea.sendKeys(text);
 
         return this;
     }
 
-    public AllCreateProjectPage deleteDescription() {
+    public BaseSaveProjectPage deleteDescription() {
         descriptionTextarea.clear();
 
         return this;
     }
 
-    public AllCreateProjectPage clickSaveButton() {
+    public BaseSaveProjectPage clickSaveButton() {
         saveButton.click();
 
         return this;
-    }
-
-    public List<String> getLeftSideMenuNameList() {
-        getWait10().until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("side-panel")));
-
-        return leftMenuElementsList.stream()
-                .map(WebElement::getText).toList();
     }
 }
