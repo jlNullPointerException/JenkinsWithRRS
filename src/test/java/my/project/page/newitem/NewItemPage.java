@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.Optional;
 
 public class NewItemPage extends BasePage {
     public static List<String> itemType = List.of(
@@ -20,6 +21,10 @@ public class NewItemPage extends BasePage {
             "Folder",
             "Multibranch Pipeline",
             "Organization Folder"
+    );
+    public static List<String> unacceptableSpecChar = List.of(
+            "!", "@", ";", ":", "[", "]", "<", ">",
+            "$", "%", "&", "?", "*", "|", "\\" ,"/"
     );
 
     @FindBy(id = "name")
@@ -109,7 +114,15 @@ public class NewItemPage extends BasePage {
                 .getCssValue("color");
     }
 
+    public String findUnacceptableChar(String itemName) {
+        Optional<String> firstUnacceptableChar = itemName.chars()
+                .mapToObj(c -> String.valueOf((char) c))
+                .filter(unacceptableSpecChar::contains)
+                .findFirst();
 
+        return firstUnacceptableChar.orElse(null);
+
+    }
 
 }
 

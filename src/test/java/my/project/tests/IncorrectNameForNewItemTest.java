@@ -5,15 +5,8 @@ import my.project.page.HomePage;
 import my.project.page.freestyle.FreestyleConfigurationPage;
 import my.project.page.freestyle.FreestylePage;
 import my.project.page.newitem.NewItemPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
-
-import java.util.List;
-
 
 public class IncorrectNameForNewItemTest extends BaseTest {
 
@@ -46,40 +39,19 @@ public class IncorrectNameForNewItemTest extends BaseTest {
         Assert.assertFalse(newItemPage.isOkButtonEnabled());
     }
 
-//    @Ignore
-//    @Test
-//    public void specialCharactersError() {
-//        WebDriver driver = getDriver();
-//
-//        final String input = "676&&@#3224";
-//        final List<String> unacceptableSpecChar1 = List.of(
-//                "!", "@", ";", ":", "[", "]", "<", ">",
-//                "$", "%", "&", "?", "*", "|", "\\" ,"/"
-//        );
-//        final String unacceptableSpecChar = "!@;:[]<>$%&?*|\\/";
-//        char ch = '\u0000';
-//
-//        for (int i = 0; i < input.length(); i++) {
-//            if (unacceptableSpecChar.indexOf(input.charAt(i)) != -1) {
-//                ch = input.charAt(i);
-//                break;
-//            }
-//        }
-//
-//        final String errorText = "» ‘" + ch  + "’ is an unsafe character";
-//
-//        driver.findElement(By.xpath("//*[@id=\"tasks\"]/div[1]/span/a")).click();
-//        driver.findElement(By.id("name")).sendKeys(input);
-//
-//        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.id("itemname-invalid")));
-//
-//        Assert.assertEquals(
-//                driver.findElement(By.id("itemname-invalid")).getText(), errorText);
-//        Assert.assertEquals(
-//                driver.findElement(By.cssSelector("#itemname-invalid")).getCssValue("color"), RED);
-//        Assert.assertFalse(
-//                driver.findElement(By.id("ok-button")).isEnabled());
-//    }
+    @Test
+    public void specialCharactersError() {
+        final String name = "676&&@#3224";
+
+        NewItemPage newItemPage = new HomePage(getDriver())
+                .clickNewItemOnLeftSidePanel()
+                .sendItemName(name);
+
+        Assert.assertEquals(newItemPage.getErrorText(),
+                "» ‘" + newItemPage.findUnacceptableChar(name)  + "’ is an unsafe character");
+        Assert.assertEquals(newItemPage.getErrorColor(), RED);
+        Assert.assertFalse(newItemPage.isOkButtonEnabled());
+    }
 
     @Test
     public void dotEndError() {
