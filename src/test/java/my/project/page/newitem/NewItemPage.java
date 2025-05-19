@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class NewItemPage extends BasePage {
+
     public static List<String> itemType = List.of(
             "Freestyle project",
             "Pipeline",
@@ -32,9 +33,6 @@ public class NewItemPage extends BasePage {
 
     @FindBy(id = "ok-button")
     private WebElement okButton;
-
-    @FindBy(className = "hudson_model_FreeStyleProject")
-    public WebElement freestyleProject;
 
     @FindBy(id = "itemname-required")
     private WebElement emptyError;
@@ -63,16 +61,10 @@ public class NewItemPage extends BasePage {
         return okButton.isEnabled();
     }
 
-    public FreestyleConfigurationPage clickOkButton() {
+    public <T> T clickOkButton(T resultPage) {
         okButton.click();
 
-        return new FreestyleConfigurationPage(getDriver());
-    }
-
-    public ErrorPage clickOkButtonWithError() {
-        okButton.click();
-
-        return new ErrorPage(getDriver());
+        return resultPage;
     }
 
     public <T> T selectItemAndClickOk(int itemIndex, T resultPage) {
@@ -115,6 +107,7 @@ public class NewItemPage extends BasePage {
     }
 
     public String findUnacceptableChar(String itemName) {
+
         Optional<String> firstUnacceptableChar = itemName.chars()
                 .mapToObj(c -> String.valueOf((char) c))
                 .filter(unacceptableSpecChar::contains)

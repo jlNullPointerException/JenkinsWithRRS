@@ -40,7 +40,7 @@ public class CopyFromFreestyleProjectTest extends BaseTest {
                 .sendItemName(projectNameForCopy)
                 .selectItemTypeByName(NewItemPage.itemType.get(0))
                 .sendTextCopyForm(PROJECT_NAME)
-                .clickOkButton();
+                .clickOkButton(new FreestyleConfigurationPage(getDriver()));
 
         Assert.assertEquals(freestyleConfigurationPage.getDescriptionText(), DESCRIPTION);
         Assert.assertTrue(freestyleConfigurationPage.getSelectThrottleBuilds());
@@ -57,7 +57,7 @@ public class CopyFromFreestyleProjectTest extends BaseTest {
                 .sendItemName(projectNameForCopy)
                 .selectItemTypeByName(NewItemPage.itemType.get(0))
                 .sendTextCopyForm(nonexistentName)
-                .clickOkButtonWithError();
+                .clickOkButton(new ErrorPage(getDriver()));
 
         Assert.assertEquals(errorPage.getTitle(),"Error");
         Assert.assertEquals(errorPage.getErrorText(), "No such job: %s".formatted(nonexistentName));
