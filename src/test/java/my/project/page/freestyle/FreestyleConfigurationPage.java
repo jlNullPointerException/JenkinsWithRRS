@@ -1,5 +1,6 @@
 package my.project.page.freestyle;
 
+import my.project.page.saveItem.AllCreateProjectPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -36,10 +37,10 @@ public class FreestyleConfigurationPage extends BasePage {
         return this;
     }
 
-    public FreestyleProjectPage clickSaveButton() {
+    public AllCreateProjectPage clickSaveButton() {
         getWait5().until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
 
-        return new FreestyleProjectPage(getDriver());
+        return new AllCreateProjectPage(getDriver());
     }
 
     public FreestyleConfigurationPage clickThrottleBuilds() {

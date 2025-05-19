@@ -1,6 +1,5 @@
-package my.project.page.freestyle;
+package my.project.page.saveItem;
 
-import my.project.page.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +10,7 @@ import my.project.common.BasePage;
 
 import java.util.List;
 
-public class FreestyleProjectPage extends BasePage {
+public class AllCreateProjectPage extends BasePage {
 
     @FindBy(id = "description-link")
     private WebElement descriptionButton;
@@ -33,7 +32,7 @@ public class FreestyleProjectPage extends BasePage {
 
 
 
-    public FreestyleProjectPage(WebDriver driver) {
+    public AllCreateProjectPage(WebDriver driver) {
         super(driver);
     }
 
@@ -45,25 +44,25 @@ public class FreestyleProjectPage extends BasePage {
         return descriptionText.getText();
     }
 
-    public FreestyleProjectPage clickDescriptionButton() {
+    public AllCreateProjectPage clickDescriptionButton() {
         descriptionButton.click();
 
         return this;
     }
 
-    public FreestyleProjectPage sendDescription(String text) {
+    public AllCreateProjectPage sendDescription(String text) {
         descriptionTextarea.sendKeys(text);
 
         return this;
     }
 
-    public FreestyleProjectPage deleteDescription() {
+    public AllCreateProjectPage deleteDescription() {
         descriptionTextarea.clear();
 
         return this;
     }
 
-    public FreestyleProjectPage clickSaveButton() {
+    public AllCreateProjectPage clickSaveButton() {
         saveButton.click();
 
         return this;

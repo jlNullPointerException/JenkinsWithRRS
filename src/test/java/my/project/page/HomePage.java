@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import my.project.common.BasePage;
 import my.project.common.TestUtils;
 
-import my.project.page.freestyle.FreestyleProjectPage;
+import my.project.page.saveItem.AllCreateProjectPage;
 
 import my.project.page.newitem.NewItemPage;
 
@@ -47,14 +47,31 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[@href='/manage/about']")
     private WebElement jenkinsAboutOptionInJenkinsVersionDropDownMenu;
 
-    @FindBy(xpath = "//*[@id='tippy-6']/div/div/div/a[3]")
-    private WebElement configure;
-
-    @FindBy(xpath = "//*[@id='tippy-6']/div/div/div/button[2]")
-    private WebElement delete;
-
     @FindBy(xpath = "//*[@id='jenkins']/dialog[2]/div[3]/button[1]")
     private WebElement buttonYesDeleteProject;
+
+    public static List<String> jobMenu = List.of(
+            "Changes",
+            "Build Now",
+            "Configure",
+            "Delete Project",
+            "Delete Pipeline",
+            "Stages",
+            "Rename",
+            "Pipeline Syntax",
+            "Delete Multi-configuration project",
+            "New Item",
+            "Delete Folder",
+            "Build History",
+            "Credentials",
+            "Scan Multibranch Pipeline Log",
+            "Multibranch Pipeline Events",
+            "Delete Multibranch Pipeline",
+            "Move",
+            "Scan Organization Folder Log",
+            "Organization Folder Events",
+            "Delete Organization Folder"
+    );
 
     private final static String JOB_PATTERN = "//tr[@id='job_%s']";
 
@@ -113,21 +130,20 @@ public class HomePage extends BasePage {
         return new NewItemPage(getDriver());
     }
 
-    public void clickOnSelectButtonInMenu(String nameItem) {
+    public void selectItemByNameAndClickMenu(String nameItem) {
         getWait10().until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//span[text()='%s']".formatted(nameItem)))).click();
     }
 
-    public <T> T clickOnConfigure(String nameItem, T resultPage) {
-        clickOnSelectButtonInMenu(nameItem);
-        configure.click();
-
-        return resultPage;
+    public void selectActionWithItemAndClick(String actionName) {
+        getWait5().until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//*[contains(@class, 'jenkins-dropdown__item') and contains(normalize-space(.), '%s')]"
+                        .formatted(actionName)))).click();
     }
 
-    public <T> T clickOnDelete(String nameItem, T resultPage) {
-        clickOnSelectButtonInMenu(nameItem);
-        delete.click();
+    public <T> T clickOnAction(String nameItem, String actionName, T resultPage) {
+        selectItemByNameAndClickMenu(nameItem);
+        selectActionWithItemAndClick(actionName);
 
         return resultPage;
     }
@@ -284,10 +300,10 @@ public class HomePage extends BasePage {
         return buildScheduled.getText().equals("Build scheduled");
     }
 
-    public FreestyleProjectPage clickProjectName(String projectName) {
+    public AllCreateProjectPage clickProjectName(String projectName) {
         getDriver().findElement(By.linkText(projectName)).click();
 
-        return new FreestyleProjectPage(getDriver());
+        return new AllCreateProjectPage(getDriver());
     }
 
     public String getJobLastSuccess(String jobName) {

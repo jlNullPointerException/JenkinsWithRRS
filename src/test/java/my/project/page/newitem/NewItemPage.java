@@ -4,6 +4,7 @@ import my.project.common.BasePage;
 import my.project.page.error.ErrorPage;
 
 import my.project.page.freestyle.FreestyleConfigurationPage;
+import my.project.page.pipeline.PipelineConfigurationPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -75,6 +76,13 @@ public class NewItemPage extends BasePage {
         okButton.click();
 
         return new FreestyleConfigurationPage(getDriver());
+    }
+
+    public PipelineConfigurationPage selectPipelineAndClickOk() {
+        selectItemTypeByName(itemType.get(1));
+        okButton.click();
+
+        return new PipelineConfigurationPage(getDriver());
     }
 
     public NewItemPage sendTextCopyForm(String text) {
