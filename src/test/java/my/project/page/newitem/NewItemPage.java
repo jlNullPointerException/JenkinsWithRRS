@@ -1,9 +1,6 @@
 package my.project.page.newitem;
 
 import my.project.page.base.BasePage;
-import my.project.page.error.ErrorPage;
-
-import my.project.page.freestyle.FreestyleConfigurationPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,6 +37,9 @@ public class NewItemPage extends BasePage {
     @FindBy(id = "itemname-invalid")
     private WebElement errorText;
 
+    @FindBy(id = "from")
+    private WebElement copyFrom;
+
     public NewItemPage(WebDriver driver) {
         super(driver);
     }
@@ -75,11 +75,9 @@ public class NewItemPage extends BasePage {
     }
 
     public NewItemPage sendTextCopyForm(String text) {
-        WebElement actualTextCopyForm = getWait5().until(ExpectedConditions.visibilityOfElementLocated(
-                By.id("from")));
-        actualTextCopyForm.sendKeys(text);
+        getWait5().until(ExpectedConditions.visibilityOf(copyFrom)).sendKeys(text);
 
-        return new NewItemPage(getDriver());
+        return this;
     }
 
     public String getEmptyErrorText() {
@@ -110,7 +108,7 @@ public class NewItemPage extends BasePage {
 
         Optional<String> firstUnacceptableChar = itemName.chars()
                 .mapToObj(c -> String.valueOf((char) c))
-                .filter(unacceptableSpecChar::contains)
+                .filter(o -> unacceptableSpecChar.contains(o))
                 .findFirst();
 
         return firstUnacceptableChar.orElse(null);
