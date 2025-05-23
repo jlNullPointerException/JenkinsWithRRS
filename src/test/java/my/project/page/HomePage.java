@@ -155,10 +155,21 @@ public class HomePage extends BasePage {
         if (isJobListEmpty()) {
             return List.of();
         }
-
         return getDriver().findElements(By.cssSelector(".jenkins-table__link > span:nth-child(1)")).stream()
                 .map(WebElement::getText).toList();
     }
+
+    public <T> T clickOnItem(String itemName, T resultPage) {
+       WebElement item = getWait5().until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//*[@id='job_%s']/td[3]/a/span"
+                        .formatted(itemName))));
+       Actions actions = new Actions(getDriver());
+       actions.moveToElement(item).perform();
+       item.click();
+
+        return resultPage;
+    }
+
 
     public String getNameOfView() {
         return getWait10().until(ExpectedConditions.visibilityOfElementLocated(
