@@ -197,9 +197,6 @@ public final class JenkinsUtils {
         deleteByLink("manage/credentials/store/system/domain/%s/doDelete",
                 getSubstringsFromPage(systemPage, "<a href=\"domain/", "\" class"),
                 getCrumbFromPage(systemPage));
-
-//        postHttp(ProjectUtils.getUrl() + "user/admin/credentials/store/user/domain/_/doDelete",
-//                String.format("Jenkins-Crumb=%s", getCrumbFromPage(systemPage)));
     }
 
     static void clearData() {
